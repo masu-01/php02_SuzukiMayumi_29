@@ -58,3 +58,6 @@ function escape1($str)
 
 
 ?>
+
+
+//検索したい
