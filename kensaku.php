@@ -1,30 +1,40 @@
-
 <?php
 
-// POSTデータ(検索キーワード)を受け取る
-$keyword = $_POST['kensaku'];
+require_once('funcs.php');
 
-// DB接続情報
+// 検索キーワードを受け取ります
+$keyword = $_POST['kensaku'];
+// console_log($keyword);
+
+//1.  DB接続します
 try {
     //Password:MAMP='root',XAMPP=''
     $pdo = new PDO('mysql:dbname=book_list;charset=utf8;host=localhost','root','root');
-
-    //  検索するSQL文
-    // $sql = 'select * from book_data where author = :keyword';
-
-
-    // プリペアドステートメントを作成
-	$stmt = $pdo->prepare("SELECT * FROM book_data WHERE author = :keyword");
-
-    // プレースホルダと変数をバインド
-	$stmt -> bindParam(":keyword", $keyword, PDO::PARAM_STR);
-	$stmt -> execute(); //実行
-
-	// データを取得
-	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
 } catch (PDOException $e) {
     exit('DBConnectError'.$e->getMessage());
+}
+
+//２．データ取得SQL作成
+$stmt = $pdo->prepare("SELECT * FROM book_data WHERE author = '$keyword' ");  //WHERE author = '$keyword' 
+$status = $stmt->execute();
+
+//３．データ表示
+$view = "";
+if ($status == false) {
+    //execute（SQL実行時にエラーがある場合）
+    $error = $stmt->errorInfo();
+    exit('ErrorQuery:' . print_r($error, true));
+}else{
+    //Selectデータの数だけ自動でループしてくれる「FETCH_ASSOC」
+    while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $view .= '<p>'
+                    . h($result['no'])  . '＝＝＝＝＝＝＝＝＝＝<br> '
+                    . h($result['date'])  . '<br>'
+                    .'<a href= "'. h($result['url']).  '" target="_blank">'. h($result['title'])  .'</a>　'
+                    . h($result['author']).  '<br>'
+                    . h($result['memo']) . '<br>＝＝＝＝＝＝＝＝＝＝'
+                .'</p>';  //「.」は「+」の意味
+    }
 }
 
 ?>
@@ -49,7 +59,7 @@ try {
         <a class="navbar-brand" href="index.php">書籍登録フォームはこちら</a>
         </div>
         <div class="navbar-header">
-        <a class="navbar-brand" href="select copy.php">一覧に戻る</a>
+        <a class="navbar-brand" href="select.php">一覧に戻る</a>
         </div>
     </div>
     </nav>
@@ -58,7 +68,7 @@ try {
 
 <!-- Main[Start] -->
 <div>
-    <div class="container jumbotron"><?= $rec ?></div>
+    <div class="container jumbotron"><?= $view ?></div>
 </div>
 <!-- Main[End] -->
 

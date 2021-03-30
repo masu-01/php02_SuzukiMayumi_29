@@ -37,7 +37,6 @@ if ($status == false) {
                     . h($result['memo']) . '<br>＝＝＝＝＝＝＝＝＝＝'
                 .'</p>';  //「.」は「+」の意味
     }
-
 }
 ?>
 
@@ -48,7 +47,7 @@ if ($status == false) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>登録書籍いちらん</title>
+<title>本一覧</title>
 <link rel="stylesheet" href="css/range.css">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <style>div{padding: 10px;font-size:16px;}</style>
@@ -68,6 +67,17 @@ if ($status == false) {
 
 <!-- Main[Start] -->
 <div>
+    <div class="container jumbotron">
+    検索機能つけたい！ <br>
+    だれの本を探しますか？
+    <form action="kensaku.php" method="post">
+        <!-- 任意の<input>要素＝入力欄などを用意する -->
+        <input type="text" name="kensaku">
+        <!-- 送信ボタンを用意する -->
+        <input type="submit" name="submit" value="検索">
+    </form>
+    </div>
+
     <div class="container jumbotron"><?= $view ?></div>
 </div>
 <!-- Main[End] -->
