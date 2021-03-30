@@ -26,18 +26,20 @@
     <!-- Head[End] -->
 
     <!-- Main[Start] -->
-    <form method="POST" action="insert.php">
-        <div class="jumbotron">
-            <fieldset>
-                <legend>書籍登録フォーム</legend>
-                <label>タイトル：<input type="text" name="title"></label><br>
-                <label>著者：<input type="text" name="author"></label><br>
-                <label>URL：<input type="text" name="url"></label><br>
-                <label>メモ：<textArea name="memo" rows="4" cols="40"></textArea></label><br>
-                <input type="submit" value="送信">
-            </fieldset>
-        </div>
-    </form>
+
+    <!-- フォームを作って「insert.php」に送る -->
+        <form method="POST" action="insert.php">
+            <div class="jumbotron">
+                <fieldset>
+                    <legend>書籍登録フォーム</legend>
+                    <label>タイトル：<input type="text" name="title"></label><br>
+                    <label>著者：<input type="text" name="author"></label><br>
+                    <label>URL：<input type="text" name="url"></label><br>
+                    <label>メモ：<textArea name="memo" rows="4" cols="40"></textArea></label><br>
+                    <input type="submit" value="送信">
+                </fieldset>
+            </div>
+        </form>
     <!-- Main[End] -->
 
 

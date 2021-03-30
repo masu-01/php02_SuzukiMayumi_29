@@ -2,42 +2,39 @@
 
 // スクリプトを書かれても動かないようにするおまじない
 // ここでファンクションhを作っておいて、表示するときにこの「h」を使う
-// function h($str){
-//     return htmespecialchar($str,ENT_QUOTES);
-// }
+    require_once('funcs.php');
 
-require_once('funcs.php');
 
-//1.  DB接続します
-try {
-    //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=book_list;charset=utf8;host=localhost','root','root');
-} catch (PDOException $e) {
-    exit('DBConnectError'.$e->getMessage());
-}
-
-//２．データ取得SQL作成
-$stmt = $pdo->prepare("SELECT * FROM book_data");
-$status = $stmt->execute();
-
-//３．データ表示
-$view = "";
-if ($status == false) {
-    //execute（SQL実行時にエラーがある場合）
-    $error = $stmt->errorInfo();
-    exit('ErrorQuery:' . print_r($error, true));
-}else{
-    //Selectデータの数だけ自動でループしてくれる「FETCH_ASSOC」
-    while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-        $view .= '<p>'
-                    . h($result['no'])  . '＝＝＝＝＝＝＝＝＝＝<br> '
-                    . h($result['date'])  . '<br>'
-                    .'<a href= "'. h($result['url']).  '" target="_blank">'. h($result['title'])  .'</a>　'
-                    . h($result['author']).  '<br>'
-                    . h($result['memo']) . '<br>＝＝＝＝＝＝＝＝＝＝'
-                .'</p>';  //「.」は「+」の意味
+//  DBに接続します
+    try {
+        //Password:MAMP='root',XAMPP=''
+        $pdo = new PDO('mysql:dbname=book_list;charset=utf8;host=localhost','root','root');
+    } catch (PDOException $e) {
+        exit('DBConnectError'.$e->getMessage());
     }
-}
+
+//  データを取得するためのSQL文を作成する
+    $stmt = $pdo->prepare("SELECT * FROM book_data");
+    $status = $stmt->execute();
+
+//  登録した全部のデータを表示する
+    $view = "";
+    if ($status == false) {
+        //execute（SQL実行時にエラーがある場合）
+        $error = $stmt->errorInfo();
+        exit('ErrorQuery:' . print_r($error, true));
+    }else{
+        //Selectデータの数だけ自動でループしてくれる「FETCH_ASSOC」
+        while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $view .= '<p>'
+                        . h($result['no'])  . '＝＝＝＝＝＝＝＝＝＝<br> '
+                        . h($result['date'])  . '<br>'
+                        .'<a href= "'. h($result['url']).  '" target="_blank">'. h($result['title'])  .'</a>　'
+                        . h($result['author']).  '<br>'
+                        . h($result['memo']) . '<br>＝＝＝＝＝＝＝＝＝＝'
+                    .'</p>';  //「.」は「+」の意味
+        }
+    }
 ?>
 
 
@@ -67,18 +64,18 @@ if ($status == false) {
 
 <!-- Main[Start] -->
 <div>
+<!-- 検索フォームを作成して、検索ワードを「kensaku.php」に送る -->
     <div class="container jumbotron">
-    検索機能つけたい！ <br>
     だれの本を探しますか？
     <form action="kensaku.php" method="post">
-        <!-- 任意の<input>要素＝入力欄などを用意する -->
         <input type="text" name="kensaku">
-        <!-- 送信ボタンを用意する -->
         <input type="submit" name="submit" value="検索">
     </form>
     </div>
 
+<!-- 表示エリア -->
     <div class="container jumbotron"><?= $view ?></div>
+
 </div>
 <!-- Main[End] -->
 

@@ -1,41 +1,42 @@
 <?php
 
-require_once('funcs.php');
+// スクリプトを書かれても動かないようにするおまじない
+// ここでファンクションhを作っておいて、表示するときにこの「h」を使う
+    require_once('funcs.php');
 
 // 検索キーワードを受け取ります
-$keyword = $_POST['kensaku'];
-// console_log($keyword);
+    $keyword = $_POST['kensaku'];
 
-//1.  DB接続します
-try {
-    //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=book_list;charset=utf8;host=localhost','root','root');
-} catch (PDOException $e) {
-    exit('DBConnectError'.$e->getMessage());
-}
-
-//２．データ取得SQL作成
-$stmt = $pdo->prepare("SELECT * FROM book_data WHERE author = '$keyword' ");  //WHERE author = '$keyword' 
-$status = $stmt->execute();
-
-//３．データ表示
-$view = "";
-if ($status == false) {
-    //execute（SQL実行時にエラーがある場合）
-    $error = $stmt->errorInfo();
-    exit('ErrorQuery:' . print_r($error, true));
-}else{
-    //Selectデータの数だけ自動でループしてくれる「FETCH_ASSOC」
-    while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-        $view .= '<p>'
-                    . h($result['no'])  . '＝＝＝＝＝＝＝＝＝＝<br> '
-                    . h($result['date'])  . '<br>'
-                    .'<a href= "'. h($result['url']).  '" target="_blank">'. h($result['title'])  .'</a>　'
-                    . h($result['author']).  '<br>'
-                    . h($result['memo']) . '<br>＝＝＝＝＝＝＝＝＝＝'
-                .'</p>';  //「.」は「+」の意味
+//  DB接続します
+    try {
+        //Password:MAMP='root',XAMPP=''
+        $pdo = new PDO('mysql:dbname=book_list;charset=utf8;host=localhost','root','root');
+    } catch (PDOException $e) {
+        exit('DBConnectError'.$e->getMessage());
     }
-}
+
+//  データ取得のためのSQL文を作成します
+    $stmt = $pdo->prepare("SELECT * FROM book_data WHERE author = '$keyword' "); 
+    $status = $stmt->execute();
+
+//  データ表示
+    $view = "";
+    if ($status == false) {
+        //execute（SQL実行時にエラーがある場合）
+        $error = $stmt->errorInfo();
+        exit('ErrorQuery:' . print_r($error, true));
+    }else{
+        //Selectデータの数だけ自動でループしてくれる「FETCH_ASSOC」
+        while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $view .= '<p>'
+                        . h($result['no'])  . '＝＝＝＝＝＝＝＝＝＝<br> '
+                        . h($result['date'])  . '<br>'
+                        .'<a href= "'. h($result['url']).  '" target="_blank">'. h($result['title'])  .'</a>　'
+                        . h($result['author']).  '<br>'
+                        . h($result['memo']) . '<br>＝＝＝＝＝＝＝＝＝＝'
+                    .'</p>';  //「.」は「+」の意味
+        }
+    }
 
 ?>
 
