@@ -10,11 +10,11 @@
 
 
 //1. POSTデータ取得
-$name   = $_POST["name"];
-$email  = $_POST["email"];
-$age    = $_POST["age"];
-$content = $_POST["content"];
-$id = $_POST["id"];
+$title   = $_POST["title"];
+$author  = $_POST["author"];
+$url    = $_POST["url"];
+$memo = $_POST["memo"];
+$no = $_POST["no"];
 
 //2. DB接続します
 //*** function化する！  *****************
@@ -34,25 +34,25 @@ $pdo = db_conn();  //そのなかの「db_conn（関数）」を呼び出す
 //３．データ登録SQL作成
 $stmt = $pdo->prepare(
                 "UPDATE 
-                    gs_an_table 
+                    book_data
                 SET 
-                    name = :name,
-                    email = :email,
-                    age = :age,
-                    content = :content,
-                    indate = sysdate()
+                    title = :title,
+                    author = :author,
+                    url = :url,
+                    memo = :memo,
+                    date = sysdate()
                 WHERE
-                    id = :id
+                    no = :no
                 ;"
             );
 
 // 数値の場合 PDO::PARAM_INT
 // 文字の場合 PDO::PARAM_STR
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);
-$stmt->bindValue(':age', $age, PDO::PARAM_INT);
-$stmt->bindValue(':content', $content, PDO::PARAM_STR);
-$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+$stmt->bindValue(':title', $title, PDO::PARAM_STR);
+$stmt->bindValue(':author', $author, PDO::PARAM_STR);
+$stmt->bindValue(':url', $url, PDO::PARAM_INT);
+$stmt->bindValue(':memo', $memo, PDO::PARAM_STR);
+$stmt->bindValue(':no', $no, PDO::PARAM_INT);
 $status = $stmt->execute(); //実行
 
 //４．データ登録処理後
@@ -67,3 +67,5 @@ if ($status == false) {
     // header("Location: index.php");
     // exit();
 }
+
+

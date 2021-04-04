@@ -63,10 +63,10 @@ if ($status == false) {
                 <legend>修正する書籍</legend>
                 <!-- <label>登録日（最終更新日）：<input type="text" name="name" value="<?= $result['date'] ?>"></label><br> -->
                 <label>登録日（最終更新日）：<?= $result['date'] ?><br>
-                <label>タイトル：<input type="text" name="name" value="<?= $result['title'] ?>"></label><br>
-                <label>著者：<input type="text" name="email" value="<?= $result['author'] ?>"></label><br>
-                <label>URL：<input type="text" name="age" value="<?= $result['url'] ?>"></label><br>
-                <label>メモ：<textarea name="content" rows="4" cols="40"><?= $result['memo'] ?></textarea></label><br>
+                <label>タイトル：<input type="text" name="title" value="<?= $result['title'] ?>"></label><br>
+                <label>著者：<input type="text" name="author" value="<?= $result['author'] ?>"></label><br>
+                <label>URL：<input type="text" name="url" value="<?= $result['url'] ?>"></label><br>
+                <label>メモ：<textarea name="memo" rows="4" cols="40"><?= $result['memo'] ?></textarea></label><br>
                 <!-- 「hidden」は隠せるけどデータを送れる -->
                 <input type="hidden" name="no" value="<?= $result['no'] ?>"><br> 
                 <input type="submit" value="送信">

@@ -32,8 +32,7 @@
                         .'<a href= "'. h($result['url']).  '" target="_blank">'. h($result['title'])  .'</a>　'
                         . h($result['author']).  '<br>'
                         . h($result['memo']) .  '<br>'
-                        . '<a href= "detail.php?id='. $result['no'].  '">'. '更新　'  .'</a>' //リンク先これから
-                        . '<a href= "'. h($result['url']).  '" target="_blank">'. '削除'  .'</a>'   //リンク先これから
+                        . '<a href= "detail.php?id='. $result['no'].  '">'. '更新する'  .'</a>' 
                         . '<br>＝＝＝＝＝＝＝＝＝＝'
                     .'</p>';  //「.」は「+」の意味
         }
