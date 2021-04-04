@@ -31,7 +31,10 @@
                         . h($result['date'])  . '<br>'
                         .'<a href= "'. h($result['url']).  '" target="_blank">'. h($result['title'])  .'</a>　'
                         . h($result['author']).  '<br>'
-                        . h($result['memo']) . '<br>＝＝＝＝＝＝＝＝＝＝'
+                        . h($result['memo']) .  '<br>'
+                        . '<a href= "detail.php?id='. $result['no'].  '">'. '更新　'  .'</a>' //リンク先これから
+                        . '<a href= "'. h($result['url']).  '" target="_blank">'. '削除'  .'</a>'   //リンク先これから
+                        . '<br>＝＝＝＝＝＝＝＝＝＝'
                     .'</p>';  //「.」は「+」の意味
         }
     }
@@ -67,7 +70,7 @@
 <!-- 検索フォームを作成して、検索ワードを「kensaku.php」に送る -->
     <div class="container jumbotron">
     だれの本を探しますか？
-    <form action="kensaku.php" method="post">
+    <form action="search.php" method="post">
         <input type="text" name="kensaku">
         <input type="submit" name="submit" value="検索">
     </form>
