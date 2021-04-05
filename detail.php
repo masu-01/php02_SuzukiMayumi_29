@@ -71,8 +71,13 @@ if ($status == false) {
                 <input type="hidden" name="no" value="<?= $result['no'] ?>"><br> 
                 <input type="submit" value="送信">
             </fieldset>
-        </div>
+            </div>
     </form>
+
+    <!-- 削除するリンクも作る -->
+    <button onclick="location.href='delete.php?id=<?= $result['no'] ?>'">このデータを削除する</button>
+
+
 </body>
 
 </html>
