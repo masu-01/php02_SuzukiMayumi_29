@@ -16,7 +16,7 @@
     }
 
 //  データ取得のためのSQL文を作成します
-    $stmt = $pdo->prepare("SELECT * FROM book_data WHERE author = '$keyword' "); 
+    $stmt = $pdo->prepare("SELECT * FROM book_data WHERE author like '%$keyword%' "); 
     $status = $stmt->execute();
 
 //  データ表示
