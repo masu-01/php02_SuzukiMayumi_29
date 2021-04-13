@@ -19,7 +19,11 @@
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="navbar-header"><a class="navbar-brand" href="select.php">登録書籍リストはこちら</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="select.php">書籍リストはこちら</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="login.php">ログイン</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="logout.php">ログアウト</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="user_regi.php">ユーザー登録</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="user_select.php">ユーザーリスト</a></div>
             </div>
         </nav>
     </header>

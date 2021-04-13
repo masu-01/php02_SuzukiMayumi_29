@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+require_once('funcs.php');   //「funcs.php」の中を読み込んで
+loginCheck();
 
 //  index.phpのフォームから↓送られてきたものを受け取って（$_POST）、変数に格納する
  $title = $_POST['title'];

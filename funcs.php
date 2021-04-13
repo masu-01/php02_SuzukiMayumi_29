@@ -38,3 +38,12 @@ function sql_error($stmt){
 }
 
 
+// ログインチェク処理 loginCheck()
+function loginCheck(){
+    if($_SESSION['chk_ssid'] != session_id()){   //「!=」は違ったらという意味
+        exit("LOGIN ERROR");
+    }else{
+        session_regenerate_id(true);    //session_IDを新たに発行する
+        $_SESSION['chk_ssid'] = session_id();   //「chk_ssid」の中身を新しいsession_IDに更新する
+    }
+}
